@@ -3,223 +3,574 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>화신 채용 공고</title> <style>
+    <title>화신 채용 공고 - Together, We Innovate</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
         /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', Roboto, 'Noto Sans KR', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            margin: 0;
-            background-color: #f4f7f6;
+            font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+            line-height: 1.7;
+            color: #2c3e50;
+            background: #2A4DCD;
+            min-height: 100vh;
+            position: relative;
         }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(42, 77, 205, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(42, 77, 205, 0.3) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Header */
         .header {
-            background-color: #007bff;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 30px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid #667eea;
         }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
         .header h1 {
-            margin: 0;
-            font-size: 24px;
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+        
+        .header-tagline {
+            font-size: 14px;
+            color: #7f8c8d;
+            font-weight: 500;
+            margin-top: 5px;
+        }
+        
+        .job-count-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         /* Main Container */
         .view-container {
-            max-width: 1200px;
-            margin: 20px auto; 
-            padding: 0 20px;
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 30px;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Content Wrapper: 좌우 분할 콘텐츠 */
+        /* Content Wrapper */
         .content-wrapper {
             display: flex;
-            gap: 20px; 
-            min-height: 70vh;
+            gap: 30px;
+            min-height: 75vh;
         }
 
-        /* Sidebar (Job List) */
+        /* Sidebar */
         .sidebar {
-            width: 300px;
-            background-color: #ffffff;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+            width: 340px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 0;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
             flex-shrink: 0;
-            overflow-y: auto; 
-            max-height: calc(100vh - 100px); /* 탭이 제거되어 높이 조정 */
+            overflow: hidden;
+            max-height: calc(100vh - 180px);
+            position: sticky;
+            top: 140px;
         }
-        .sidebar h2 {
+        
+        .sidebar-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
             font-size: 18px;
-            color: #007bff;
-            border-bottom: 2px solid #e9ecef;
-            padding-bottom: 10px;
-            margin-top: 0;
-            margin-bottom: 15px;
+            font-weight: 700;
         }
+        
+        .job-list-wrapper {
+            overflow-y: auto;
+            max-height: calc(100vh - 280px);
+            padding: 10px;
+        }
+        
+        .job-list-wrapper::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .job-list-wrapper::-webkit-scrollbar-track {
+            background: #f1f3f5;
+            border-radius: 10px;
+        }
+        
+        .job-list-wrapper::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+        }
+        
         .job-list {
             list-style: none;
-            padding: 0;
         }
+        
         .job-list li {
-            padding: 10px 15px;
-            margin-bottom: 5px;
+            padding: 16px 18px;
+            margin-bottom: 8px;
             cursor: pointer;
-            border-radius: 4px;
-            transition: background-color 0.2s, color 0.2s;
-            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            background: white;
+            position: relative;
+            overflow: hidden;
         }
+        
+        .job-list li::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+        
         .job-list li:hover {
-            background-color: #e9f5ff;
-            color: #007bff;
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.25);
+            border-color: #667eea;
         }
+        
+        .job-list li:hover::before {
+            transform: scaleY(1);
+        }
+        
         .job-list li.active {
-            background-color: #007bff;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            font-weight: bold;
-            border-color: #007bff;
+            font-weight: 700;
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .job-list li.active::before {
+            display: none;
+        }
+        
+        .job-category {
+            font-size: 11px;
+            opacity: 0.8;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        
+        .job-role {
+            font-size: 15px;
+            font-weight: 600;
         }
 
         /* Main Content Area */
         .main-content {
             flex-grow: 1;
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
             overflow-y: auto;
-            max-height: calc(100vh - 100px); /* 탭이 제거되어 높이 조정 */
+            max-height: calc(100vh - 180px);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .main-content::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        .main-content::-webkit-scrollbar-track {
+            background: #f1f3f5;
+            border-radius: 10px;
+        }
+        
+        .main-content::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
         }
         
         /* Initial Message */
         .initial-message {
             text-align: center;
-            padding: 50px;
-            color: #6c757d;
-            border: 2px dashed #ccc;
-            border-radius: 8px;
+            padding: 80px 40px;
+            color: #7f8c8d;
+        }
+        
+        .initial-message-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+        
+        .initial-message h2 {
+            font-size: 28px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .initial-message p {
+            font-size: 16px;
+            line-height: 1.8;
         }
 
-        /* Public View JD Display Styles */
+        /* Job Detail Card */
+        .public-job-card {
+            animation: slideIn 0.5s ease;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
         .public-job-card header {
-            border-bottom: 4px solid #007bff;
-            padding-bottom: 15px;
-            margin-bottom: 30px;
+            border-bottom: none;
+            padding: 0 0 30px 0;
+            margin-bottom: 35px;
+            position: relative;
         }
+        
+        .public-job-card header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+        
         .public-job-card h1 {
-            font-size: 28px;
-            color: #007bff;
-            margin: 0 0 5px 0;
+            font-size: 36px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
         }
-        .public-job-card .job-details {
+        
+        .job-meta {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        
+        .job-meta-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #667eea;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+        
+        .company-intro {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+            padding: 30px;
+            margin-bottom: 35px;
+            border-radius: 16px;
+            border-left: 5px solid #667eea;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .company-intro::before {
+            content: '💼';
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 60px;
+            opacity: 0.1;
+        }
+        
+        .company-intro h2 {
+            font-size: 20px;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .company-intro p {
+            margin: 10px 0;
+            color: #2c3e50;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+        
+        .company-intro strong {
+            font-weight: 700;
+            color: #764ba2;
             font-size: 16px;
-            color: #666;
         }
-        .public-job-card .job-details span {
-            font-weight: bold;
-            color: #333;
-            margin-right: 15px;
-        }
+        
         .public-job-card section {
-            margin-bottom: 30px;
-            padding: 20px;
-            border-left: 5px solid #007bff;
-            background-color: #f9f9f9;
-            border-radius: 4px;
+            margin-bottom: 35px;
+            padding: 30px;
+            background: white;
+            border-radius: 16px;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+            position: relative;
         }
+        
+        .public-job-card section:hover {
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+        
         .public-job-card h2 {
             font-size: 22px;
-            color: #007bff;
-            border-bottom: 2px solid #e9ecef;
-            padding-bottom: 8px;
-            margin-top: 0;
-            margin-bottom: 15px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
+        
+        .section-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            font-size: 20px;
+        }
+        
         .public-job-card ul {
             list-style-type: none;
             padding-left: 0;
         }
+        
         .public-job-card ul li {
             position: relative;
-            margin-bottom: 10px;
-            padding-left: 25px;
+            margin-bottom: 15px;
+            padding-left: 35px;
+            line-height: 1.8;
+            font-size: 15px;
         }
+        
         .public-job-card ul li::before {
-            content: '✅';
-            color: #007bff;
-            font-weight: bold;
+            content: '✓';
             position: absolute;
             left: 0;
             top: 0;
-        }
-        .public-job-card .company-intro {
-            border-left: none;
-            background-color: #eaf3ff;
-            padding: 15px 20px;
-            margin-bottom: 30px;
-            border-radius: 8px;
-            border: 1px solid #cce0ff;
-        }
-        .public-job-card .company-intro p {
-            margin: 5px 0;
-            color: #1a56a0;
-        }
-        .public-job-card footer {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #ccc;
-            text-align: center;
-            font-size: 14px;
-            color: #666;
-        }
-        .public-job-card .apply-button {
-            display: inline-block;
-            background-color: #28a745;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 10px 25px;
-            text-decoration: none;
-            border-radius: 5px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: bold;
-            margin-top: 20px;
-            transition: background-color 0.3s;
-        }
-        .public-job-card .apply-button:hover {
-            background-color: #218838;
-        }
-        .public-job-card strong {
-            font-weight: bold;
-            color: #007bff;
+            font-size: 14px;
         }
         
-        /* Layout Control */
-        .public-view { display: flex; } /* 항상 표시 */
+        .public-job-card strong {
+            font-weight: 700;
+            color: #667eea;
+        }
+        
+        .public-job-card footer {
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            border-radius: 16px;
+            text-align: center;
+            border: 2px dashed #667eea;
+        }
+        
+        .public-job-card footer p {
+            margin: 10px 0;
+            color: #2c3e50;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+        
+        .cta-container {
+            margin-top: 25px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .apply-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .apply-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+        }
+        
+        .info-text {
+            font-size: 13px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                max-height: 300px;
+                position: relative;
+                top: 0;
+            }
+            
+            .main-content {
+                max-height: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 20px;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .view-container {
+                padding: 0 15px;
+            }
+            
+            .main-content {
+                padding: 25px;
+            }
+            
+            .public-job-card h1 {
+                font-size: 28px;
+            }
+        }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <h1>화신 채용 공고</h1>
+        <div class="header-content">
+            <div>
+                <h1>🚀 화신 채용 공고</h1>
+                <div class="header-tagline">Together, We Innovate the Future</div>
+            </div>
+            <div class="job-count-badge" id="jobCountBadge">
+                📢 0개 포지션 오픈
+            </div>
+        </div>
     </div>
 
     <div id="appContainer" class="view-container">
-        
         <div class="content-wrapper public-view">
-            <div class="sidebar" id="publicSidebar">
-                <h2>현재 오픈된 채용 공고</h2>
-                <ul class="job-list" id="publicJobList"></ul>
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    현재 모집 중인 포지션
+                </div>
+                <div class="job-list-wrapper">
+                    <ul class="job-list" id="publicJobList"></ul>
+                </div>
             </div>
 
             <div class="main-content" id="publicJobDetailDisplay">
                 <div id="publicInitialMessage" class="initial-message">
-                    <p>좌측 목록에서 상세 내용을 확인할 채용 공고를 선택해주세요.</p>
+                    <div class="initial-message-icon">👈</div>
+                    <h2>포지션을 선택해주세요</h2>
+                    <p>좌측 목록에서 관심 있는 채용 공고를 선택하시면<br>상세한 직무 정보를 확인하실 수 있습니다.</p>
                 </div>
             </div>
         </div>
-
     </div>
 
     <script>
-        // JD 데이터는 그대로 유지됩니다. (benefits 필드는 비어 있음)
         const initialJobDescriptions = [
             { 
                 id: 1, category: '경영지원', role: 'HR',
@@ -316,8 +667,8 @@
                 title: '자동차 부품 품질 관리/보증 (QA/QC) 담당자',
                 shortDescription: '고객 신뢰의 상징! 화신의 품질을 책임지는 핵심 전문가를 모십니다.',
                 responsibilities: '<ul><li>개발 초기 단계부터 양산 전까지 신제품의 품질 검증을 지원하고, 고객의 요구사항을 충족시키는지 확인합니다.</li><li>양산 단계에서 생산된 제품의 최종 품질을 보증하고 관리하며, 무결점(Zero-Defect) 문화를 만들어갑니다.</li></ul>',
-                qualifications: '<ul><li>기계/자동차계열 등 관련 공학 전공자로서 품질 관리의 기본 원리를 이해해야 합니다.</li><li>다양한 측정 및 검사 방법에 대한 깊은 이해가 필수입니다.</li><li>**품질경영기사 자격증을 보유**하고 계신 분을 찾습니다.</li></ul>',
-                preferred: '<ul><li>**일반기계기사 자격증**을 추가로 보유하고 계시다면, 기계 구조에 대한 이해도를 높게 평가합니다.</li></ul>',
+                qualifications: '<ul><li>기계/자동차계열 등 관련 공학 전공자로서 품질 관리의 기본 원리를 이해해야 합니다.</li><li>다양한 측정 및 검사 방법에 대한 깊은 이해가 필수입니다.</li><li><strong>품질경영기사 자격증을 보유</strong>하고 계신 분을 찾습니다.</li></ul>',
+                preferred: '<ul><li><strong>일반기계기사 자격증</strong>을 추가로 보유하고 계시다면, 기계 구조에 대한 이해도를 높게 평가합니다.</li></ul>',
                 benefits: '',
                 applyLink: '#'
             },
@@ -326,8 +677,8 @@
                 title: '자동차 부품 설계 엔지니어',
                 shortDescription: '미래 자동차 부품의 혁신을 2D/3D 모델로 현실화하는 창조적인 역할을 담당합니다.',
                 responsibilities: '<ul><li>고객의 요구사항과 기술 표준을 만족하는 혁신적인 자동차 부품 기구 설계를 주도합니다.</li><li>설계한 부품의 시제품 제작을 지원하고, 기능 및 내구성을 검증합니다.</li><li>설계 이력 관리를 위한 관련 문서를 정확하게 작성하고 관리합니다.</li></ul>',
-                qualifications: '<ul><li>기계/자동차계열 등 공학 전공자로서 기구 설계에 대한 탄탄한 지식을 갖추셔야 합니다.</li><li>**설계 Tool (CAD, CAE 등)을 능숙하게 활용**할 수 있는 능력이 필수입니다.</li></ul>',
-                preferred: '<ul><li>**CATIA 사용 경험**이 있거나 부품설계 유경험자라면 저희 팀에 빠르게 합류하여 프로젝트를 이끌어갈 수 있습니다.</li></ul>',
+                qualifications: '<ul><li>기계/자동차계열 등 공학 전공자로서 기구 설계에 대한 탄탄한 지식을 갖추셔야 합니다.</li><li><strong>설계 Tool (CAD, CAE 등)을 능숙하게 활용</strong>할 수 있는 능력이 필수입니다.</li></ul>',
+                preferred: '<ul><li><strong>CATIA 사용 경험</strong>이 있거나 부품설계 유경험자라면 저희 팀에 빠르게 합류하여 프로젝트를 이끌어갈 수 있습니다.</li></ul>',
                 benefits: '',
                 applyLink: '#'
             },
@@ -336,37 +687,44 @@
                 title: '산업 안전 및 보건 관리자',
                 shortDescription: '모두가 안심하고 일할 수 있는, 안전하고 건강한 사업장을 만들어 주세요.',
                 responsibilities: '<ul><li>사업장 내 위험 요소를 사전에 파악하고 안전 보건 계획을 수립, 관리하여 안전 문화를 정착시킵니다.</li><li>ISO 14001(환경), ISO 45001(안전보건) 시스템을 운영하고 최신 법규에 맞춰 관리합니다.</li></ul>',
-                qualifications: '<ul><li>**산업안전기사 자격증을 필수**로 보유하신 분을 찾습니다.</li><li>산업공학, 안전공학 등 관련 전공 지식을 갖추고 있어야 합니다.</li></ul>',
+                qualifications: '<ul><li><strong>산업안전기사 자격증을 필수</strong>로 보유하신 분을 찾습니다.</li><li>산업공학, 안전공학 등 관련 전공 지식을 갖추고 있어야 합니다.</li></ul>',
                 preferred: '<ul><li>만약 중대재해 발생 시 침착하게 대응하고 해결한 경험이 있다면 큰 도움이 될 거예요.</li><li>화학 안전기사 자격증이 있다면 더욱 우대해 드립니다.</li></ul>',
                 benefits: '',
                 applyLink: '#'
             }
         ];
 
-        let jobDescriptions = initialJobDescriptions; 
+        let jobDescriptions = initialJobDescriptions;
 
         const publicJobListElement = document.getElementById('publicJobList');
         const publicJobDetailDisplayElement = document.getElementById('publicJobDetailDisplay');
         const publicInitialMessageElement = document.getElementById('publicInitialMessage');
+        const jobCountBadgeElement = document.getElementById('jobCountBadge');
 
+        const sectionIcons = {
+            'responsibilities': '🎯',
+            'qualifications': '✅',
+            'preferred': '💡'
+        };
 
-        // --- Public View Functions ---
         function renderPublicView() {
-            // 직무 목록 개수 업데이트
-            document.querySelector('#publicSidebar h2').textContent = `현재 오픈된 채용 공고 (${jobDescriptions.length}개)`;
+            jobCountBadgeElement.textContent = `📢 ${jobDescriptions.length}개 포지션 오픈`;
             
             publicJobListElement.innerHTML = '';
             publicJobDetailDisplayElement.innerHTML = '';
             publicInitialMessageElement.style.display = 'block';
             
             if (jobDescriptions.length === 0) {
-                 publicJobListElement.innerHTML = `<li><p style="text-align:center; color:#6c757d;">현재 오픈된 채용 공고가 없습니다.</p></li>`;
-                 return;
+                publicJobListElement.innerHTML = `<li style="text-align:center; color:#7f8c8d; padding:30px;">현재 오픈된 채용 공고가 없습니다.</li>`;
+                return;
             }
 
             jobDescriptions.forEach(job => {
                 const listItem = document.createElement('li');
-                listItem.textContent = `[${job.category}] ${job.role}`;
+                listItem.innerHTML = `
+                    <div class="job-category">${job.category}</div>
+                    <div class="job-role">${job.role}</div>
+                `;
                 listItem.dataset.jobId = job.id;
                 listItem.addEventListener('click', () => displayPublicJobDetail(job.id));
                 publicJobListElement.appendChild(listItem);
@@ -386,64 +744,55 @@
                 <div class="public-job-card">
                     <header>
                         <h1>${job.title}</h1>
-                        <p class="job-details">
-                            <span>**직군:** ${job.category}</span>
-                            <span>**직무:** ${job.role}</span>
-                        </p>
+                        <div class="job-meta">
+                            <span class="job-meta-item">📁 ${job.category}</span>
+                            <span class="job-meta-item">💼 ${job.role}</span>
+                        </div>
                     </header>
 
                     <div class="company-intro">
-                        <h2 style="color: #1a56a0; border-bottom: none; margin-bottom: 5px;">🌟 화신은요...</h2>
+                        <h2>🌟 포지션 소개</h2>
                         <p><strong>${job.shortDescription}</strong></p>
                         <p>당신의 잠재력을 마음껏 펼칠 수 있는 최고의 환경을 제공합니다.</p>
                     </div>
 
                     <section>
-                        <h2>🎯 주요 업무 및 책임 (Key Responsibilities)</h2>
+                        <h2><span class="section-icon">🎯</span> 주요 업무 및 책임</h2>
                         ${job.responsibilities}
                     </section>
 
                     <section>
-                        <h2>✅ 필수 경험 및 자격 (Minimum Qualifications)</h2>
+                        <h2><span class="section-icon">✅</span> 필수 경험 및 자격</h2>
                         ${job.qualifications}
                     </section>
 
                     <section>
-                        <h2>💡 우대 사항 (Preferred Qualifications)</h2>
+                        <h2><span class="section-icon">💡</span> 우대 사항</h2>
                         ${job.preferred}
                     </section>
                     
                     <footer>
-                        <p>이 공고는 화신의 인재상에 부합하는 **${job.role}** 전문가를 찾기 위해 신중하게 작성되었습니다.</p>
+                        <p>이 공고는 화신의 인재상에 부합하는 <strong>${job.role}</strong> 전문가를 찾기 위해 신중하게 작성되었습니다.</p>
                         <p>도전적인 환경에서 함께 성장하고 싶다면, 지금 바로 지원하세요!</p>
+                        <div class="cta-container">
+                            <a href="${job.applyLink}" class="apply-button">
+                                <span>지원하기</span>
+                                <span>→</span>
+                            </a>
+                            <span class="info-text">* 지원 시 포트폴리오와 경력기술서를 함께 제출해주세요</span>
+                        </div>
                     </footer>
                 </div>
             `;
+            
+            // Scroll to top of content
+            publicJobDetailDisplayElement.scrollTop = 0;
         }
 
-        // --- Utility for HTML escaping ---
-        function escapeHtml(text) {
-            const map = {
-                '&': '&amp;',
-                '<': '&lt;',
-                '>': '&gt;',
-                '"': '&quot;',
-                "'": '&#039;'
-            };
-            if (text && text.startsWith('<ul>') && text.endsWith('</ul>')) {
-                return text;
-            }
-            return text ? text.replace(/[&<>"']/g, function(m) { return map[m]; }) : '';
-        }
-
-
-        // --- Initialization on page load ---
         window.onload = () => {
             renderPublicView();
         };
-
     </script>
 
 </body>
-
 </html>
